@@ -9,13 +9,13 @@ import { CatsService } from './cats.service';
 import { CreatePostDto } from './dto/create-cat.dto';
 
 @ApiBearerAuth()
-@ApiTags('cats')
-@Controller('cats')
+@ApiTags('posts')
+@Controller('posts')
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create cat' })
+  @ApiOperation({ summary: 'Create post' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(@Body() data: CreatePostDto): Promise<CreatePostDto> {
     return this.catsService.create(data);
