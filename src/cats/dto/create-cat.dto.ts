@@ -1,12 +1,16 @@
 import { IsInt, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCatDto {
-  @IsString()
-  readonly name: string;
-
+export class CreatePostDto {
   @IsInt()
-  readonly age: number;
+  @ApiProperty()
+  readonly id: number;
 
   @IsString()
-  readonly breed: string;
+  @ApiProperty()
+  readonly body: string;
+
+  @IsString()
+  @ApiProperty()
+  readonly title: string;
 }

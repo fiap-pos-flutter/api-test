@@ -1,17 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCatDto } from './dto/create-cat.dto';
-import { Cat } from './entities/cat.entity';
+import { CreatePostDto } from './dto/create-cat.dto';
 
 @Injectable()
 export class CatsService {
-  private readonly cats: Cat[] = [];
+  private cats: CreatePostDto[] = [];
 
-  create(cat: CreateCatDto): Cat {
+  create(cat: CreatePostDto): CreatePostDto {
     this.cats.push(cat);
     return cat;
   }
 
-  findOne(id: number): Cat {
-    return this.cats[id];
+  findOne(id: number): CreatePostDto {    
+    return this.cats.find((element) => element.id == id);
+  }
+
+  findAll(): CreatePostDto[] {    
+    return this.cats;
+  }
+
+  deleteOne(id: number): CreatePostDto[] {        
+    var foundedIndex = this.cats.findIndex((element) => element.id == id);
+    if(foundedIndex != -1) {      
+      this.cats = this.cats.filter((element) => element.id != this.cats[foundedIndex].id);      
+    }
+
+    return this.cats;    
+  }
+
+  updateOne(data: CreatePostDto): CreatePostDto[] {    
+    var index = this.cats.findIndex((element) => element.id == data.id);
+    if(index != null && index != -1) {
+      this.cats[index] = data;
+    }
+    return this.cats;
   }
 }
